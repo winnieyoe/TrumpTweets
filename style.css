@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "HansonBold";
+  src: url("Hanson Bold 700.otf");
+}
+
+@font-face {
+  font-family: "NeueHaasUnica";
+  src: url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.eot");
+  src: url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.eot?#iefix") format("embedded-opentype"),
+  url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.woff2") format("woff2"),
+  url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.woff") format("woff"),
+  url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.ttf") format("truetype"),
+  url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.svg#Neue Haas Unica") format("svg");
+}
+
+body{
+  background-color: #1512a9;
+  color: #FFFFFF;
+}
+
+h1{
+  text-align: center;
+  font-family: "HansonBold";
+  text-transform: uppercase;
+  font-size: 62px;
+  width: 80%;
+  line-height: 1.15;
+  margin: auto;
+}
+
+p{
+  text-align: center;
+  font-family: "NeueHaasUnica";
+  font-size: 16px;
+  color: #8a8e9e;
+  margin-top: 0%;
+}
+
+a{
+  color: #8a8e9e;
+}
+
+a:hover {
+  color: #FFF;
+}
+
+#title{
+  margin-top: 5%;
+}
+
+#underline{
+  text-decoration: underline;
+}
