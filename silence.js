@@ -1,18 +1,24 @@
 //Trump tweets dataset from https://www.kaggle.com/austinreese/trump-tweets/data
 let table;
+let canvas;
 let tweet;
 let tweets = [];
 let synth;
 let input = document.getElementById("inputWord");
 let inputWord = "silence";
 let submitForm = document.getElementById("form");
+let wordCount = document.getElementById("wordCount");
+let allCount = document.getElementById("allCount");
+let count = 0;
 
 function preload(){
   table = loadTable("trumptweets.csv", "csv", "header");
 }
 
 function setup(){
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight*0.7);
+  canvas.parent("visual");
+
   for (let i=0; i<table.getRowCount(); i++){
     let date = table.getRow(i).get("date").slice(0,10);
     let time = table.getRow(i).get("date").slice(11,16);
@@ -42,21 +48,21 @@ function setup(){
     // console.log(haveSilence(tweet))
   }
   // console.log(tweets);
-  frameRate(10);
+  frameRate(1);
 
   synth = new Tone.Synth().toMaster();
 }
 
 function windowResized(){
-  canvas = resizeCanvas(windowWidth, windowHeight);
+  canvas = resizeCanvas(windowWidth, windowHeight*0.7);
 }
 
 submitForm.onsubmit = function(e){
   e.preventDefault();
   inputWord = input.value;
   alert("Searching for '" + inputWord.toUpperCase() + "' in Trump Tweets");
+  count = 0;
 }
-
 // submitForm.addEventListener("onsubmit", function(e){
 //   e.preventDefault();
 //   console.log(e)
@@ -114,6 +120,7 @@ textSize(16);
         fill(255, 255, 255);
         text(tweets[i].word[j], width/2, (j+1)*28);
         synth.triggerAttackRelease("C4", "32n");
+        count++;
       } else {
         let theWord = tweets[i].word[j];
         if (theWord != undefined && !theWord.includes("http") && !theWord.includes(".com")){
@@ -121,14 +128,16 @@ textSize(16);
           fill(220, 0, 0);
           text(tweets[i].word[j], width/2, (j+1)*28);
           // console.log(tweets[i].word[j].length)
-          rectMode(CENTER);
           if(!tweets[i].word[j]){
             // rect(width/2, (j+1)*30, 30, 22)
           } else {
+            rectMode(CENTER);
             rect(width/2, (j+1)*28-5, tweets[i].word[j].length*12, 18)
           }
         }
       }
     }
   } i++;
+  allCount.innerHTML = i;
+  wordCount.innerHTML = count;
 }
