@@ -3,6 +3,9 @@ let table;
 let tweet;
 let tweets = [];
 let synth;
+let input = document.getElementById("inputWord");
+let inputWord = "silence";
+let submitForm = document.getElementById("form");
 
 function preload(){
   table = loadTable("trumptweets.csv", "csv", "header");
@@ -14,8 +17,8 @@ function setup(){
     let date = table.getRow(i).get("date").slice(0,10);
     let time = table.getRow(i).get("date").slice(11,16);
     tweet = table.getRow(i).get("content");
-    word = tweet.split(" ");
-    result = [];
+    word = tweet.split(" ").filter( (w) => w!==undefined && w.length > 0 ); //left: input of function, right: output of function
+    // result = [];
     //console.log(word);
     //for(let j=0; i<word.length; j++){
       //console.log(word[j]);
@@ -39,7 +42,7 @@ function setup(){
     // console.log(haveSilence(tweet))
   }
   // console.log(tweets);
-  frameRate(20);
+  frameRate(10);
 
   synth = new Tone.Synth().toMaster();
 }
@@ -47,6 +50,18 @@ function setup(){
 function windowResized(){
   canvas = resizeCanvas(windowWidth, windowHeight);
 }
+
+submitForm.onsubmit = function(e){
+  e.preventDefault();
+  inputWord = input.value;
+  alert("Searching for '" + inputWord.toUpperCase() + "' in Trump Tweets");
+}
+
+// submitForm.addEventListener("onsubmit", function(e){
+//   e.preventDefault();
+//   console.log(e)
+//   return false;
+// })
 
 // function getWordLengths(str){
 //   let len = [];
@@ -91,16 +106,15 @@ textSize(16);
   // }
 
   if (i<tweets.length){
-    for(let j=0; j< tweets[0].word.length; j++){
+    for(let j=0; j< tweets[i].word.length; j++){
       fill(138, 142, 158);
       text(tweets[j].date, random(width), height/2-130);
       text(tweets[j].time, random(width), height/2-100);
-      if(tweets[i].word[j] == "silence" || tweets[i].word[j] == "Silence" || tweets[i].word[j] =="SILENCE"){
+      if(tweets[i].word[j].toLowerCase() == inputWord.toLowerCase()){
         fill(255, 255, 255);
         text(tweets[i].word[j], width/2, (j+1)*28);
         synth.triggerAttackRelease("C4", "32n");
       } else {
-
         let theWord = tweets[i].word[j];
         if (theWord != undefined && !theWord.includes("http") && !theWord.includes(".com")){
           noStroke();
@@ -111,13 +125,9 @@ textSize(16);
           if(!tweets[i].word[j]){
             // rect(width/2, (j+1)*30, 30, 22)
           } else {
-            rect(width/2, (j+1)*28-5, tweets[i].word[j].length*11, 18)
+            rect(width/2, (j+1)*28-5, tweets[i].word[j].length*12, 18)
           }
-
         }
-
-
-
       }
     }
   } i++;
