@@ -13,7 +13,7 @@
   url("//db.onlinewebfonts.com/t/7250d52844cced73ed70675d1b78c60c.svg#Neue Haas Unica") format("svg");
 }
 
-body{
+body, html{
   background-color: #1512a9;
   color: #FFFFFF;
   overflow: hidden;
@@ -25,7 +25,7 @@ h1{
   text-align: center;
   font-family: "HansonBold";
   text-transform: uppercase;
-  font-size: 3.75rem;
+  font-size: 3.5rem;
   width: 85%;
   line-height: 1.15;
   margin: auto;
@@ -60,7 +60,7 @@ a:hover {
 input[type=text]{
   font-family: "HansonBold";
   text-transform: uppercase;
-  font-size: 3.75rem;
+  font-size: 3.5rem;
   width: 400px;
   border: none;
   color: #8a8e9e;
@@ -88,7 +88,7 @@ input[type=text]{
 }
 
 #title{
-  margin-top: 4%;
+  margin-top: 2%;
 }
 
 #underline{
@@ -155,7 +155,7 @@ and (max-width : 1024px) {
 }
 
 @media only screen
-and (min-width : 320px){
+and (max-width : 420px){
   h1 {
     width:95%;
     font-size: 5rem;

@@ -43,7 +43,7 @@ function setup(){
 }
 
 function windowResized(){
-  canvas = resizeCanvas(displayWidth, displayHeight);
+  canvas = resizeCanvas(windowWidth, windowHeight);
 }
 
 submitForm.onsubmit = function(e){
@@ -75,13 +75,13 @@ textSize(16);
         if (theWord != undefined && !theWord.includes("http") && !theWord.includes(".com")){
           noStroke();
           fill(220, 0, 0);
-          text(tweets[i].word[j], width/2, (j+1)*28);
+          text(tweets[i].word[j], windowWidth/2, (j+1)*28);
           // console.log(tweets[i].word[j].length)
           if(!tweets[i].word[j]){
             // rect(width/2, (j+1)*30, 30, 22)
           } else {
             rectMode(CENTER);
-            rect(width/2, (j+1)*28-5, tweets[i].word[j].length*12, 18)
+            rect(windowWidth/2, (j+1)*28-5, tweets[i].word[j].length*12, 18)
           }
         }
       }
